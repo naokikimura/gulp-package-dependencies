@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- stable
+- '6'
+- '4'
+deploy:
+  provider: npm
+  email: n.kimura.cap@gmail.com
+  api_key:
+    secure: y4jfWEytTxwogvy93LGOjWr0x/LF8UPTTG4yB8IcNh2xHUMrePZ/ZjTNAaNid7rBHkRhpl3VbbO7cNS3QBGyi5Tb2fZt1xp+e6ZQCGTCNeWeKekKtuZaUkxZLJwZlrSTj/sRaRoxJCiFWOXeunnpKQ/1arHdSlFVHwQU1lvd0i/miz1vWFSTxzPWJHRZEve2Ihg36Rml/EctTu1s+cGVHsXAcdK5XO/iB8uvmWFoem2/cy83ku37AuFOKjFVLe4F8z1IX0z9JPAtB2UauF9OHGea9A+Fe+voTHen7jUQhwAGXjZZv7d0MqEuXp87SrU5OOeOzGEXpEdBy3vDKhkBui1Tdut1PTygJprbmS9i17fOFzd+nnBeF7EZWFYaiexsasCHgL0h3aCpoPLga8zwCpEKrzDPidJDAXrTC8G5UGwcx4rEYXSfsEYPQN2QI8jGH5NTrSCKJ6JINsHNOE9X92nfuNZnMcLxyxT/FiP1eZBcZ5FRjWQNswXzYu+zigp+JrvZzXOWQYl/WjYp9UXr1YeGjxUsS+IembXtOUnGFoUIuERNeooDeU7S6wkg5FCvmiY0P0XhMHhGJ/l5RMsJQhSbrzeH2DCqeqIaqZ+oVeyyY6/U0kxWVM1BxtSfjhnSnYsE0Mhc2qWERGqPw0/KbMOl17RQFYoyg2RnsyI5fho=
+  on:
+    tags: true
+    repo: naokikimura/gulp-dependencies
