@@ -13,6 +13,7 @@ const debug = util.debuglog('gulp-dependencies');
 
 interface Options {
   excludes: (name: string) => boolean;
+  glob: (name: string) => string;
   folder: string;
   options: any;
   package: Package;
@@ -21,6 +22,7 @@ interface Options {
 
 const defaultOptions: Options = {
   excludes: () => true,
+  glob: name => '**/*',
   folder: 'node_modules',
   options: {},
   package: JSON.parse(fs.readFileSync('./package.json', { encoding: 'UTF-8' })),
@@ -37,7 +39,7 @@ export = function dependencies(options = defaultOptions) {
       resolver(opts.packageLock.dependencies, Array.prototype.flatMap),
     )
       .filter(opts.excludes)
-      .map(name => path.join(opts.folder, name, '**/*'))
+      .map(name => path.join(opts.folder, name, opts.glob(name)))
       .concat(opts.folder),
     Object.assign({ base: opts.folder }, opts.options),
   );
