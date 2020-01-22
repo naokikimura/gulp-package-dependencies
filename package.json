@@ -1,6 +1,6 @@
 {
   "name": "gulp-package-dependencies",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "takes the list of project direct dependencies and optionally transitive dependencies and copies them.",
   "main": "dist/index.js",
   "scripts": {
