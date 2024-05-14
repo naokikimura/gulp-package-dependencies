@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/naokikimura/gulp-dependencies#readme",
   "dependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^5.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
