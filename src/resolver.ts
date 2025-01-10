@@ -8,7 +8,7 @@ export default function resolver(dictionary: Dependencies, mapper = Array.protot
   return function resolve(name: string) {
     dependencySet.add(name);
     const module = dictionary[name];
-    const requires = module && module.requires && Object.keys(module.requires);
+    const requires = module?.requires && Object.keys(module.requires);
     debug(`${name}: ${requires}`);
     return [name].concat(
       requires

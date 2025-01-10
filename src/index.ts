@@ -25,18 +25,19 @@ const defaultOptions: Options = {
   glob: name => '**/*',
   folder: 'node_modules',
   options: {},
-  package: JSON.parse(fs.readFileSync('./package.json', { encoding: 'UTF-8' })),
-  packageLock: JSON.parse(fs.readFileSync('./package-lock.json', { encoding: 'UTF-8' })),
+  package: JSON.parse(fs.readFileSync('./package.json', { encoding: 'utf8' })),
+  packageLock: JSON.parse(fs.readFileSync('./package-lock.json', { encoding: 'utf8' })),
 };
 
 export = function dependencies(options = defaultOptions) {
   debug(`options = ${util.inspect(options)}`);
   const opts = Object.assign({}, defaultOptions, options);
   debug(`opts = ${util.inspect(opts)}`);
+  const dependencies = 'dependencies' in opts.packageLock ? opts.packageLock.dependencies : opts.packageLock.packages;
   return gulp.src(
     Array.prototype.flatMap.call<string[], any[], string[]>(
       Object.keys(opts.package.dependencies),
-      resolver(opts.packageLock.dependencies, Array.prototype.flatMap),
+      resolver(dependencies, Array.prototype.flatMap),
     )
       .filter(opts.excludes)
       .map(name => path.join(opts.folder, name, opts.glob(name)))

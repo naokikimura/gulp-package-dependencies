@@ -21,19 +21,19 @@
   },
   "homepage": "https://github.com/naokikimura/gulp-dependencies#readme",
   "dependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^5.0.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.7",
+    "@types/chai": "^5.0.1",
     "@types/gulp": "^4.0.6",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.8",
-    "chai": "^4.2.0",
-    "gulp-mocha-thin": "^0.0.4",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.5",
+    "chai": "^5.1.2",
+    "gulp-mocha-thin": "^0.0.7",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "ts-node": "^8.6.2",
+    "ts-node": "^10.9.2",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.5"
+    "typescript": "^5.7.3"
   }
 }
