@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import fs, { PathOrFileDescriptor } from 'node:fs';
 import path from 'path';
 import util from 'util';
-import resolver, { Package, PackageLock } from './resolver';
+import resolver, { Package, PackageLock } from './resolver.js';
 
 const debug = util.debuglog('gulp-dependencies');
 

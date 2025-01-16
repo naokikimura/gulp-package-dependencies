@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import resolver, { Dependencies } from '../src/resolver';
+import resolver, { Dependencies } from '../src/resolver.js';
 
 describe('resolver', () => {
   it('it should return dependency list', () => {

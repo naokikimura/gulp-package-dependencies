@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Stream } from 'node:stream';
-import dependencies from '../src/index';
+import dependencies from '../src/index.js';
 
 describe('Plugin', () => {
   it.skip('it should return Stream instance', () => {
