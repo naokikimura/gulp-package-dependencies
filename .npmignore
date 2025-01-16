@@ -103,9 +103,11 @@ typings/
 # TernJS port file
 .tern-port
 
+test/
 .vscode
-.mocharc.js
+.mocharc.json
 .travis.yml
 gulpfile.js
 tsconfig.json
 tslint.json
+.tool-versions

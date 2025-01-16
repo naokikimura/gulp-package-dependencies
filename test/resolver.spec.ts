@@ -1,8 +1,5 @@
-/// <reference types="../src/@types/package-lock-json" />
-
 import { expect } from 'chai';
-import { Dependencies } from 'package-lock-json';
-import resolver from '../src/resolver';
+import resolver, { Dependencies } from '../src/resolver';
 
 describe('resolver', () => {
   it('it should return dependency list', () => {

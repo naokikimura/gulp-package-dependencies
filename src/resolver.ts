@@ -1,7 +1,32 @@
-import { Dependencies } from 'package-lock-json';
-import util from 'util';
+import util from 'node:util';
 
 const debug = util.debuglog('gulp-dependencies');
+
+export interface Package {
+  dependencies: { [name: string]: string };
+}
+
+interface Requires {
+  [name: string]: string;
+}
+
+interface Module {
+  requires?: Requires;
+}
+
+export interface Dependencies {
+  [name: string]: Module;
+}
+
+interface PackageLock1 {
+  dependencies: Dependencies;
+}
+
+interface PackageLock2 {
+  packages: Dependencies;
+}
+
+export type PackageLock = PackageLock1 | PackageLock2;
 
 export default function resolver(dictionary: Dependencies, mapper = Array.prototype.flatMap) {
   const dependencySet = new Set<string>();
