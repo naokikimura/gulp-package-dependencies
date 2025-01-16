@@ -2,11 +2,11 @@ import gulp from 'gulp';
 import fs, { PathOrFileDescriptor } from 'node:fs';
 import path from 'path';
 import util from 'util';
-import resolver, { Package, PackageLock } from './resolver.js';
+import resolver, { PackageFile, PackageLockFile } from './resolver.js';
 
 const debug = util.debuglog('gulp-dependencies');
 
-interface Options {
+export interface Options {
   excludes: (name: string) => boolean;
   folder: string;
   glob: (name: string) => string;
@@ -28,18 +28,26 @@ export default function dependencies(options = defaultOptions): ReturnType<typeo
   debug(`options = ${util.inspect(options)}`);
   const opts = Object.assign({}, defaultOptions, options);
   debug(`opts = ${util.inspect(opts)}`);
-  const packageFile: Package = JSON.parse(fs.readFileSync(opts.package, { encoding: 'utf8' }));
-  const packageLockFile: PackageLock = JSON.parse(fs.readFileSync(opts.packageLock, { encoding: 'utf8' }));
+  const packageFile: PackageFile = JSON.parse(fs.readFileSync(opts.package, { encoding: 'utf8' }));
+  const packageLockFile: PackageLockFile = JSON.parse(fs.readFileSync(opts.packageLock, { encoding: 'utf8' }));
 
-  const packages = 'dependencies' in packageLockFile ? packageLockFile.dependencies : packageLockFile.packages;
   return gulp.src(
-    Array.prototype.flatMap.call<string[], any[], string[]>(
-      Object.keys(packageFile.dependencies),
-      resolver(packages, Array.prototype.flatMap),
-    )
-      .filter(opts.excludes)
-      .map(name => path.join(opts.folder, name, opts.glob(name)))
-      .concat(opts.folder),
+    listDependencies(packageFile, packageLockFile, opts),
     Object.assign({ base: opts.folder }, opts.options),
   );
 }
+
+export function listDependencies(
+  { dependencies }: PackageFile,
+  packageLockFile: PackageLockFile,
+  { excludes, folder, glob }: Pick<Options, "excludes" | "glob" | "folder">
+): string[] {
+  if (!dependencies) return [];
+  return Array.from(new Set(Object.keys(dependencies)
+    .flatMap(resolver(packageLockFile, Array.prototype.flatMap))
+    .filter(excludes)))
+    .map(name => path.join(folder, name, glob(name)))
+    .concat(folder)
+}
+
+export { PackageFile, PackageLockFile };
