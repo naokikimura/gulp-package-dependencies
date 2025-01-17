@@ -109,5 +109,5 @@ test/
 .travis.yml
 gulpfile.js
 tsconfig.json
-tslint.json
+eslint.config.js
 .tool-versions
