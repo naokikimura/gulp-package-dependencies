@@ -70,7 +70,7 @@ export default function resolver(packageLockFile: PackageLockFile, mapper = Arra
   const dependencySet = new Set<string>();
   const dependencies = 'dependencies' in packageLockFile ? packageLockFile.dependencies : {};
   const packages = 'packages' in packageLockFile ? packageLockFile.packages : {};
-  return function resolve(name: string) {
+  return function resolve(name: string): string[] {
     dependencySet.add(name);
 
     const requires = [
@@ -81,7 +81,10 @@ export default function resolver(packageLockFile: PackageLockFile, mapper = Arra
 
     return [name].concat(
       requires
-        ? mapper.call<string[], any[], string[]>(requires.filter(id => !dependencySet.has(id)), resolve)
+        ? mapper.call<typeof requires, [typeof resolve], typeof requires>(
+          requires.filter(id => !dependencySet.has(id)),
+          resolve,
+        )
         : [],
     ).concat([]);
   };

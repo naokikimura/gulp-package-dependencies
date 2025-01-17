@@ -48,7 +48,7 @@ describe('Plugin', () => {
         }
       }
     };
-    const dependencies = listDependencies(packagefile, lockfile, { excludes: () => true, folder: 'node_modules', glob: name => '**/*' });
+    const dependencies = listDependencies(packagefile, lockfile, { excludes: () => true, folder: 'node_modules', glob: () => '**/*' });
     expect(dependencies).to.have.members([
       'node_modules/bar/**/*',
       'node_modules/baz/**/*',

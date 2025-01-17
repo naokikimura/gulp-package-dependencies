@@ -8,9 +8,6 @@ async function spawn(command, args = [], options) {
   return child;
 }
 
-const sources = {
-  typescript: 'src/**/*.{j,t}s{,x}',
-};
 const sourcemaps = true;
 
 function tsc() {
@@ -20,10 +17,8 @@ function tsc() {
 export { tsc as 'transpile:tsc' };
 
 async function tslint() {
-  const { default : tslint } = await import('gulp-tslint');
-  return gulp.src(sources.typescript)
-    .pipe(tslint())
-    .pipe(tslint.report());
+  const options = process.env.CI ? ["--no-color"] : ["--color"]
+  return spawn('eslint', options.concat(["src", "test"]));
 }
 export { tslint as 'lint:tslint' };
 

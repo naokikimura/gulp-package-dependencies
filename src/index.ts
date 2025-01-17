@@ -18,7 +18,7 @@ export interface Options {
 const defaultOptions: Options = {
   excludes: () => true,
   folder: 'node_modules',
-  glob: name => '**/*',
+  glob: () => '**/*',
   options: undefined,
   package: './package.json',
   packageLock: './package-lock.json',
