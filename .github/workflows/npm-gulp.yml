@@ -23,4 +23,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Test with Node.js ${{ matrix.node-version }}
-      run: npm ci & npm test & npm run prepare
+      run: npm ci && npm test && npm run prepare
