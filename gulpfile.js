@@ -32,6 +32,6 @@ export { mocha as 'test:mocha' };
 
 export const transpile = gulp.parallel(tsc);
 export const lint = gulp.parallel(tslint);
-export const build = gulp.parallel(transpile);
-export default build;
 export const test = gulp.parallel(mocha);
+export const build = gulp.series(gulp.parallel(transpile, lint), test);
+export default build;
