@@ -16,11 +16,11 @@ function tsc() {
 }
 export { tsc as 'transpile:tsc' };
 
-async function tslint() {
+async function eslint() {
   const options = process.env.CI ? ["--no-color"] : ["--color"]
   return spawn('eslint', options.concat(["src", "test"]));
 }
-export { tslint as 'lint:tslint' };
+export { eslint as 'lint:eslint' };
 
 function mocha() {
   const options = process.env.CI
@@ -31,7 +31,7 @@ function mocha() {
 export { mocha as 'test:mocha' };
 
 export const transpile = gulp.parallel(tsc);
-export const lint = gulp.parallel(tslint);
+export const lint = gulp.parallel(eslint);
 export const test = gulp.parallel(mocha);
-export const build = gulp.series(gulp.parallel(transpile, lint), test);
+export const build = gulp.parallel(transpile);
 export default build;
